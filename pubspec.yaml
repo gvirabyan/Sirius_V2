@@ -65,6 +65,8 @@ flutter:
     - assets/icons/facebook.svg
     - assets/icons/apple.svg
     - assets/icons/google.svg
+    - assets/icons/sirius_icon.png
+    - assets/icons/sirius_icon2.png
     - assets/home/img1.png
 
     - .env

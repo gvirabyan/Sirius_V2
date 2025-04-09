@@ -16,7 +16,6 @@ class UserHomePage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.menu),
             onPressed: () {
-              // Действие для меню
             },
           ),
         ],

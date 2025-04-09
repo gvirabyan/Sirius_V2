@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:untitled9/screens/sign_up_screen.dart';
+import 'package:untitled9/screens/user_order_history_page.dart';
 import 'package:untitled9/screens/user_home_page.dart';
 
 Future<void> main() async {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: UserHomePage(), // Now using the separate file
+      home: UserOrderHistoryPage(), // Now using the separate file
     );
   }
 }
