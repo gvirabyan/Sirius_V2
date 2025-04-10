@@ -15,7 +15,7 @@ class UserOrderHistoryPage extends StatelessWidget {
     return SiriusScaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16.0), // 16px со всех сторон
+            padding: const EdgeInsets.all(16.0),
             child: Column(children: [
               SizedBox(height: MediaQuery.of(context).size.height * 0.08),
               const Center(

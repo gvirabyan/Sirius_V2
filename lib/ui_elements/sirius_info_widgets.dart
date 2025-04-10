@@ -31,7 +31,6 @@ class SiriusInfoWidgets extends StatelessWidget {
               const Text('HOME'),
               const Text('COMPANIES'),
               const Text('CONTACT US'),
-              const Text('CONTACT US'),
               const Text('FACEBOOK'),
               const Text('INSTAGRAM'),
               const Text('LINKEDIN'),

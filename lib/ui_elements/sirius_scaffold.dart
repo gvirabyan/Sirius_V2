@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:untitled9/screens/user_order_history_page.dart';
+import '../screens/personal_info_page.dart';
 import 'sirius_app_bar.dart'; // Твой кастомный AppBar, импортируем
 
 class SiriusScaffold extends StatefulWidget {
@@ -18,7 +20,18 @@ class _SiriusScaffoldState extends State<SiriusScaffold> {
       _isDrawerOpen = !_isDrawerOpen;
     });
   }
-
+  void navigateToPersonalInfo(BuildContext context) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => PersonalInfoPage()),
+      );
+  }
+  void navigateToOrderHistory(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => UserOrderHistoryPage()),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -57,12 +70,12 @@ class _SiriusScaffoldState extends State<SiriusScaffold> {
                                   ListTile(
                                     leading: Icon(Icons.home),
                                     title: Text('Account'),
-                                    onTap: toggleDrawer,
+                                    onTap: () =>navigateToPersonalInfo(context) ,
                                   ),
                                   ListTile(
                                     leading: Icon(Icons.history),
                                     title: Text('Order History'),
-                                    onTap: toggleDrawer,
+                                    onTap: () =>navigateToOrderHistory(context) ,
                                   ),
                                   ListTile(
                                     leading: Icon(Icons.heart_broken),

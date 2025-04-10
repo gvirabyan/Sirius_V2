@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled9/styles.dart';
 
 class OrderCard extends StatelessWidget {
   const OrderCard({super.key});
@@ -133,13 +134,7 @@ class _OrderItem extends StatelessWidget {
           // Rebook Button
           OutlinedButton(
             onPressed: () {},
-            style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.deepPurple,
-              side: const BorderSide(color: Colors.deepPurple),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
+            style: AppStyles.outlinedButton,
             child: const Text('Rebook'),
           )
         ],

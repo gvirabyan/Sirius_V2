@@ -23,6 +23,35 @@ class AppStyles {
     fontWeight: FontWeight.bold,
     color: Colors.black,
   );
+  static const TextStyle inputHint = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    color: Colors.black,
+  );
+  static ButtonStyle outlinedButton = ElevatedButton.styleFrom(
+    foregroundColor: Colors.deepPurple,
+    side: const BorderSide(color: Colors.deepPurple),
+
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), // паддинг
+  );
+
+  static ButtonStyle filledButtonPurple = ElevatedButton.styleFrom(
+    backgroundColor: Colors.deepPurple,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+  );
+  static  InputDecoration inputDecorationStyle = InputDecoration(
+    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(13),
+      borderSide: const BorderSide(color: Colors.grey, width: 1),
+    ),
+  );
 
 }
 
