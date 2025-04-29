@@ -1,81 +1,140 @@
 import 'package:flutter/material.dart';
-import 'package:untitled9/styles.dart'; // Подключаем стили, если нужно
+import 'package:untitled9/styles.dart';
 
 class SiriusInfoWidgets extends StatelessWidget {
   const SiriusInfoWidgets({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset('assets/icons/sirius_icon2.png'),
-        SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-        const Column(
-          children: [
-            Text(
-              'BECOME A PARTNER',
-              style: AppStyles.headline,
+    return Column(children: [
+      Image.asset('assets/icons/sirius_icon2.png'),
+      SizedBox(height: MediaQuery
+          .of(context)
+          .size
+          .height * 0.05),
+
+      /*@override
+    Widget build(BuildContext context) {
+    return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+    color: Colors.white,*/
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Первая секция
+          const Text(
+            'Ընկերության մասին',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
             ),
-            Divider(
-              color: Color(0xFF252591),
-              thickness: 2,
-              indent: 45,
-              endIndent: 45,
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Sirius-ի մասին',
+            style: TextStyle(color: Colors.grey),
+          ),
+          const Text(
+            'Բլոգ',
+            style: TextStyle(color: Colors.grey),
+          ),
+          const Text(
+            'Թողարկված առաջխաղացումներ',
+            style: TextStyle(color: Colors.grey),
+          ),
+          const SizedBox(height: 24),
+
+          // Вторая секция
+          const Text(
+            'Աջակցություն',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
             ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child: Column(
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Հաճախակի տրվող հարցեր',
+            style: TextStyle(color: Colors.grey),
+          ),
+          const Text(
+            'Սպասարկման կենտրոն',
+            style: TextStyle(color: Colors.grey),
+          ),
+          const SizedBox(height: 24),
+
+          // Контакты
+          const Text(
+            'Կապ մեզ հետ',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'support@sirius.am',
+            style: TextStyle(color: Colors.grey),
+          ),
+          const Text(
+            '+374 (XX) XXX-XXX',
+            style: TextStyle(color: Colors.grey),
+          ),
+          const SizedBox(height: 24),
+
+
+          const SizedBox(height: 32),
+
+          // Социальные сети
+          const Text(
+            'Հետեւեք մեզ',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('HOME'),
-              const Text('COMPANIES'),
-              const Text('CONTACT US'),
-              const Text('FACEBOOK'),
-              const Text('INSTAGRAM'),
-              const Text('LINKEDIN'),
-              const Text('YOUTUBE'),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Text(
-                  'Sirius@gmail.com',
-                  textAlign: TextAlign.center,
-                ),
+              IconButton(
+                icon: Icon(
+                  Icons.account_circle_outlined
+                ), onPressed: () {},
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 33, vertical: 12),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Text(
-                  '+374 990087',
-                  textAlign: TextAlign.center,
-                ),
+              IconButton(
+                icon: Icon(
+                    Icons.account_circle_outlined
+                ), onPressed: () {},
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('EN', style: AppStyles.myStyle2),
-                    SizedBox(width: 16),
-                    Text('RU', style: AppStyles.myStyle2),
-                  ],
-                ),
+              IconButton(
+                icon: Icon(
+                    Icons.account_circle_outlined
+                ), onPressed: () {},
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              Text('PRIVACY POLICY', style: AppStyles.myStyle2),
+              IconButton(
+                icon: Icon(
+                    Icons.account_circle_outlined
+                ), onPressed: () {},
+              ),
             ],
           ),
-        ),
-      ],
-    );
+          const SizedBox(height: 24),
+
+          // Подвал
+          const Text(
+            '© 2025 SIRIUS. ԲՈԼՈՐ ԻՐԱՎՈՒՆՔՆԵՐԸ ՊԱՀՊԱՆՎԱԾ ԵՆ',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Գաղտնիության քաղաքականություն\nՊայմաններ եւ դրույթներ',
+            style: TextStyle(color: Colors.grey),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    ]);
   }
 }

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:untitled9/screens/splash_screen.dart'; // Подключаем SplashScreen
 import 'package:untitled9/screens/sign_up_screen.dart';
-import 'package:untitled9/screens/user_order_history_page.dart';
 import 'package:untitled9/screens/user_home_page.dart';
 
 Future<void> main() async {
-  await dotenv.load(fileName: ".env"); // Загружаем .env
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
 
-  runApp(MyApp());
-
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +20,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignUpScreen(), // Now using the separate file
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(), // Переход на SplashScreen
+        '/home': (context) => const UserHomePage(), // Главная страница
+        '/signup': (context) => const SignUpScreen(), // Экран регистрации
+      },
     );
   }
 }

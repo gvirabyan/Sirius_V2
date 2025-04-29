@@ -1,5 +1,6 @@
 class UserModel {
-  final String fullName;
+  final String name;
+  final String surname;
   final String phoneNumber;
   final String email;
   final String password;
@@ -7,7 +8,8 @@ class UserModel {
 
 
   UserModel({
-    required this.fullName,
+    required this.name,
+    required this.surname,
     required this.phoneNumber,
     required this.email,
     required this.password,
@@ -16,7 +18,8 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     return {
-      "full_name": fullName,
+      "name": name,
+      "surname": surname,
       "phone_number": phoneNumber,
       "email": email,
       "password": password,

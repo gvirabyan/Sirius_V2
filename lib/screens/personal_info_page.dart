@@ -93,10 +93,12 @@ class PersonalInfoPage extends StatelessWidget {
                         alignment: Alignment.centerRight,
                         // Align text to the left
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+
+                          },
                           style: AppStyles.filledButtonPurple,
 
-                          child: const Text('Save'),
+                          child: const Text('Save',style: TextStyle(color: Colors.white)),
                         ))
                     ,
 
@@ -109,7 +111,7 @@ class PersonalInfoPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ), index: 5,
     );
   }
 }

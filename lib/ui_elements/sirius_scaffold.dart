@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:untitled9/screens/booking_bag_page.dart';
+import 'package:untitled9/screens/companies_page.dart';
 import 'package:untitled9/screens/user_order_history_page.dart';
+import 'package:untitled9/services/auth_service.dart';
 import '../screens/personal_info_page.dart';
-import 'sirius_app_bar.dart'; // Твой кастомный AppBar, импортируем
+import '../screens/service_categories_page.dart';
+import '../screens/user_home_page.dart';
+import 'sirius_app_bar.dart';
 
 class SiriusScaffold extends StatefulWidget {
   final Widget body;
 
-  const SiriusScaffold({super.key, required this.body});
+  final int index;
+
+  const SiriusScaffold({super.key, required this.body, required this.index});
 
   @override
   State<SiriusScaffold> createState() => _SiriusScaffoldState();
@@ -14,123 +21,129 @@ class SiriusScaffold extends StatefulWidget {
 
 class _SiriusScaffoldState extends State<SiriusScaffold> {
   bool _isDrawerOpen = false;
+  int _selectedIndex = 0;
 
   void toggleDrawer() {
     setState(() {
       _isDrawerOpen = !_isDrawerOpen;
+      _selectedIndex = widget.index;
     });
   }
-  void navigateToPersonalInfo(BuildContext context) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => PersonalInfoPage()),
-      );
+
+  void navigateToUserHomePage(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => UserHomePage()),
+    );
   }
+
+  void navigateToServicesPage(BuildContext context) {
+     Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => ServiceCategoriesPage()),
+    );
+  }
+
+  void navigateToPersonalInfo(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => PersonalInfoPage()),
+    );
+  }
+
+  void navigateToMyBookings(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => BookingBagPage()),
+    );
+  }
+
+  void navigateToFavorites(BuildContext context) {
+    // TODO: implement FavoritesPage
+  }
+
+  void navigateToSettingsPage(BuildContext context) {
+    // TODO: implement SettingsPage
+  }
+
   void navigateToOrderHistory(BuildContext context) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => UserOrderHistoryPage()),
     );
   }
+
+  void navigateToPaymentInfo(BuildContext context) {
+    // TODO: implement PaymentInfoPage
+  }
+
+  void navigateToCompanies(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => CompaniesPage()),
+    );
+  }
+
+  void logOut(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Ուզում ե՞ք դուրս գալ'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Ոչ'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Այո'),
+              onPressed: () {
+                AuthService().logoutUser(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        if (_isDrawerOpen) toggleDrawer();
+      },
       onHorizontalDragUpdate: (details) {
         if (details.primaryDelta! < -10 && !_isDrawerOpen) toggleDrawer();
         if (details.primaryDelta! > 10 && _isDrawerOpen) toggleDrawer();
       },
       child: Scaffold(
+        appBar: SiriusAppBar(onMenuPressed: toggleDrawer),
         body: Stack(
           children: [
-            // Основной контент
-            Scaffold(
-              appBar: SiriusAppBar(onMenuPressed: toggleDrawer),
-              body: widget.body,
-            ),
+            widget.body,
+
             // Кастомный Drawer поверх контента
             if (_isDrawerOpen)
               Positioned.fill(
                 child: GestureDetector(
-                  onTap: toggleDrawer, // Закрытие при нажатии на область вокруг
+                  onTap: toggleDrawer,
                   child: Container(
-                    color: Colors.black54, // Прозрачный фон для затемнения
+                    color: Colors.black54,
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.6, // Ширина Drawer
-                        color: Colors.white, // Цвет фона Drawer
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        color: Colors.white,
+                        child: ListView(
                           children: [
-                            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-                            Container(
-                              color: Colors.white,
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    leading: Icon(Icons.home),
-                                    title: Text('Account'),
-                                    onTap: () =>navigateToPersonalInfo(context) ,
-                                  ),
-                                  ListTile(
-                                    leading: Icon(Icons.history),
-                                    title: Text('Order History'),
-                                    onTap: () =>navigateToOrderHistory(context) ,
-                                  ),
-                                  ListTile(
-                                    leading: Icon(Icons.heart_broken),
-                                    title: Text('Favorites'),
-                                    onTap: toggleDrawer,
-                                  ),
-                                  ListTile(
-                                    leading: Icon(Icons.attach_money),
-                                    title: Text('Active Subsctiptions'),
-                                    onTap: toggleDrawer,
-                                  ),
-                                  ListTile(
-                                    leading: Icon(Icons.calendar_month),
-                                    title: Text('Booking & Appointments'),
-                                    onTap: toggleDrawer,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                            Container(
-                              color: Colors.white,
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    leading: Icon(Icons.credit_card_rounded),
-                                    title: Text('Payment Methods'),
-                                    onTap: toggleDrawer,
-                                  ),
-                                  ListTile(
-                                    leading: Icon(Icons.notifications),
-                                    title: Text('Notifications'),
-                                    onTap: toggleDrawer,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                            Container(
-                              color: Colors.white,
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    leading: Icon(Icons.headset_mic_outlined),
-                                    title: Text('Help Center'),
-                                    onTap: toggleDrawer,
-                                  ),
-                                  ListTile(
-                                    leading: Icon(Icons.question_mark),
-                                    title: Text('FAQ'),
-                                    onTap: toggleDrawer,
-                                  ),
-                                ],
-                              ),
-                            ),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05),
+                            _buildMenuSection(context),
+                            const SizedBox(height: 20),
                           ],
                         ),
                       ),
@@ -141,6 +154,162 @@ class _SiriusScaffoldState extends State<SiriusScaffold> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildMenuSection(BuildContext context) {
+    bool isProfileExpanded = true;
+
+    return StatefulBuilder(
+      builder: (context, setInnerState) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _menuItem(
+              context: context,
+              title: 'Գլխավոր',
+              index: 0,
+              selectedIndex: _selectedIndex,
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 2;
+                  _isDrawerOpen = !_isDrawerOpen;
+
+                });
+                navigateToUserHomePage(context);
+              },
+            ),
+            _menuItem(
+              context: context,
+              title: 'Ծառայություններ',
+              index: 1,
+              selectedIndex: _selectedIndex,
+              expandable: true,
+              expanded: false,
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 1;
+                });
+                navigateToServicesPage(context);
+              },
+            ),
+            _menuItem(
+              context: context,
+              index: 2,
+              selectedIndex: _selectedIndex,
+              title: 'Կազմակերպություններ',
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 2;
+                });
+                navigateToCompanies(context);
+              },
+            ),
+            _menuItem(
+              context: context,
+              title: 'Մասնագետներ',
+              index: 3,
+              selectedIndex: _selectedIndex,
+              onTap: () {
+                setState(() {
+                  _selectedIndex = widget.index;
+                });
+              },
+            ),
+            _menuItem(
+              context: context,
+              title: 'Կապ մեզ հետ',
+              index: 4,
+              selectedIndex: _selectedIndex,
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 1;
+                });
+              },
+            ),
+            ExpansionTile(
+              title: const Text(
+                'Իմ էջը',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black87,
+                ),
+              ),
+              childrenPadding: const EdgeInsets.only(left: 20),
+              collapsedIconColor: Colors.black54,
+              iconColor: Colors.black54,
+              children: [
+                _subItem(
+                    'Անձնական տվյալներ', () => navigateToPersonalInfo(context),5),
+                _subItem('Պատվերների պատմություն',
+                    () => navigateToOrderHistory(context),6),
+                _subItem('Նախըտրելի (9)', () => navigateToFavorites(context),7),
+                _subItem('Ակտիվ բաժանորդագրություններ (3)', () {},8),
+                _subItem('Booking & Appointments',
+                    () => navigateToMyBookings(context),9),
+                _subItem(
+                    'Վճարման Եղանակ', () => navigateToPaymentInfo(context),10),
+                _subItem('Դուրս գալ', () => logOut(context),11),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _menuItem({
+    required BuildContext context,
+    required String title,
+    required int index,
+    required int selectedIndex,
+    bool expandable = false,
+    bool expanded = false,
+    VoidCallback? onTap,
+  }) {
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+      title: Text(
+        title,
+        style: TextStyle(
+          color: index == _selectedIndex ? Colors.blueAccent : Colors.black87,
+          // Цвет зависит от selectedIndex
+          fontWeight:
+              index == _selectedIndex ? FontWeight.bold : FontWeight.normal,
+          // Жирный шрифт для выбранного
+
+          fontSize: 16,
+        ),
+      ),
+      trailing: expandable
+          ? Icon(
+              expanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+              color: Colors.black54,
+            )
+          : null,
+      onTap: onTap,
+    );
+  }
+
+  Widget _subItem(String title, VoidCallback onTap,int index) {
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 30),
+      title: Text(
+        title,
+        style: TextStyle(
+          color: index == _selectedIndex ? Colors.blueAccent : Colors.black87,
+          fontWeight:
+          index == _selectedIndex ? FontWeight.bold : FontWeight.normal,
+
+          fontSize: 16,
+        ),
+      ),
+
+      onTap: () {
+        onTap();
+        toggleDrawer(); // Закрыть меню при переходе
+      },
     );
   }
 }

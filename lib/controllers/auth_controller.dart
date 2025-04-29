@@ -4,7 +4,8 @@ import '../models/user_model.dart';
 import '../services/auth_service.dart';
 
 class SignUpController extends ChangeNotifier {
-  final TextEditingController fullNameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController surnameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -13,7 +14,8 @@ class SignUpController extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  String? fullNameError;
+  String? nameError;
+  String? surnameError;
   String? phoneError;
   String? emailError;
   String? passwordError;
@@ -22,19 +24,22 @@ class SignUpController extends ChangeNotifier {
   final AuthService _authService = AuthService();
 
   Future<void> signUp(BuildContext context) async {
-    fullNameError = null;
+    nameError = null;
+    surnameError = null;
     phoneError = null;
     emailError = null;
     passwordError = null;
     confirmPasswordError = null;
 
-    String fullName = fullNameController.text.trim();
+    String name = nameController.text.trim();
+    String surname = surnameController.text.trim();
     String phone = phoneController.text.trim();
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
     String confirmPassword = confirmPasswordController.text.trim();
 
-    if (fullName.isEmpty) fullNameError = "Full name is required";
+    if (name.isEmpty) nameError = "Name is required";
+    if (surname.isEmpty) surnameError = "Surname is required";
     if (phone.isEmpty) phoneError = "Phone number is required";
     if (email.isEmpty) emailError = "Email is required";
     if (password.isEmpty) passwordError = "Password is required";
@@ -43,7 +48,7 @@ class SignUpController extends ChangeNotifier {
 
     notifyListeners();
 
-    if (fullNameError != null || phoneError != null || emailError != null || passwordError != null || confirmPasswordError != null) {
+    if (nameError != null || surnameError != null || phoneError != null || emailError != null || passwordError != null || confirmPasswordError != null) {
       return;
     }
 
@@ -51,11 +56,12 @@ class SignUpController extends ChangeNotifier {
     notifyListeners();
 
     UserModel newUser = UserModel(
-      fullName: fullName,
-      phoneNumber: phone,
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword
+        name: name,
+        surname: surname,
+        phoneNumber: phone,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword
     );
 
     int success = await _authService.register(newUser);
@@ -63,29 +69,74 @@ class SignUpController extends ChangeNotifier {
     _isLoading = false;
     notifyListeners();
 
-    if (success==200) {
+    if (success == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Registration successful")),
       );
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => UserHomePage()),
-      );}
-      else if(success==422){
+      );
+    } else if (success == 422) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Validation Error")),
       );
-    }
-     else {
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Registration failed")),
       );
     }
   }
 
+  Future<void> signIn(BuildContext context) async {
+    emailError = null;
+    passwordError = null;
+
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    // Простая валидация
+    if (email.isEmpty) emailError = "Email is required";
+    if (password.isEmpty) passwordError = "Password is required";
+
+    notifyListeners();
+
+    if (emailError != null || passwordError != null) {
+      return;
+    }
+
+    _isLoading = true;
+    notifyListeners();
+
+    int success = await _authService.login(email, password);
+
+    _isLoading = false;
+    notifyListeners();
+
+    if (success == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Login successful")),
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => UserHomePage()),
+      );
+
+    } else if (success == 401) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Invalid email or password")),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Login failed")),
+      );
+    }
+  }
+
   @override
   void dispose() {
-    fullNameController.dispose();
+    nameController.dispose();
+    surnameController.dispose();
     phoneController.dispose();
     emailController.dispose();
     passwordController.dispose();

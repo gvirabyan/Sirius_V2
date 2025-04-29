@@ -43,17 +43,24 @@ dependencies:
   provider: ^6.1.2
   http: ^0.13.6
   flutter_dotenv: ^5.1.0
+  shared_preferences: ^2.5.3
+  audioplayers: ^6.4.0
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
+
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -62,12 +69,14 @@ dev_dependencies:
 flutter:
   assets:
     - assets/background.jpg
-    - assets/icons/facebook.svg
-    - assets/icons/apple.svg
-    - assets/icons/google.svg
-    - assets/icons/sirius_icon.png
-    - assets/icons/sirius_icon2.png
+    - assets/icons/
+    - assets/categories/
+    - assets/golds_gym.png
+    - assets/services/
+
     - assets/home/img1.png
+    - assets/home/spa.jpeg
+    - assets/sounds/splash_sound.mp3
 
     - .env
 
@@ -106,3 +115,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+assets/sounds/splash_sound:
+  mp3:
