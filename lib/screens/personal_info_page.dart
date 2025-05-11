@@ -17,7 +17,7 @@ class PersonalInfoPage extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                '  PERSONAL INFORMATION',
+                '  Անձնական տվյալներ',
                 style: AppStyles.myStyle.copyWith(
                     fontSize: MediaQuery.of(context).size.height * 0.04),
                 textAlign: TextAlign.center,
@@ -37,47 +37,55 @@ class PersonalInfoPage extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerLeft, // Align text to the left
                       child: Text(
-                        'Full Name *',
+                        'Անուն ազգանուն *',
                         style: AppStyles.inputHint,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                     TextField(
-                      decoration: AppStyles.inputDecorationStyle,
+                      decoration: AppStyles.inputDecorationStyle.copyWith(
+                        hintText: 'Մարիամ Ասատրյան'
+                      ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                     Align(
                       alignment: Alignment.centerLeft, // Align text to the left
                       child: Text(
-                        'Address *',
+                        'Հասցե *',
                         style: AppStyles.inputHint,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                     TextField(
-                      decoration: AppStyles.inputDecorationStyle,
+                      decoration: AppStyles.inputDecorationStyle.copyWith(
+                          hintText: 'Ք․Իջևան,Անկախության 3/1'
+                      ),
                     ),
                     Align(
                       alignment: Alignment.centerLeft, // Align text to the left
                       child: Text(
-                        'E-mail *',
+                        'Էլ․հասցե *',
                         style: AppStyles.inputHint,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                     TextField(
-                      decoration: AppStyles.inputDecorationStyle,
+                      decoration: AppStyles.inputDecorationStyle.copyWith(
+                          hintText: 'mar.asatryan@gmail.com'
+                      ),
                     ),
                     Align(
                       alignment: Alignment.centerLeft, // Align text to the left
                       child: Text(
-                        'Phone Number *',
+                        'Հեռ․համար *',
                         style: AppStyles.inputHint,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                     TextField(
-                      decoration: AppStyles.inputDecorationStyle,
+                      decoration: AppStyles.inputDecorationStyle.copyWith(
+                          hintText: '+374 77 07 17'
+                      ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                     Align(
@@ -86,7 +94,7 @@ class PersonalInfoPage extends StatelessWidget {
                         child: OutlinedButton(
                           onPressed: () {      PasswordChangePage().showPasswordChangeDialog(context);},
                           style: AppStyles.outlinedButton,
-                          child: const Text('Change Password'),
+                          child: const Text('Փոխել գաղտնաբառը'),
                         )),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.08),
                     Align(
@@ -98,7 +106,7 @@ class PersonalInfoPage extends StatelessWidget {
                           },
                           style: AppStyles.filledButtonPurple,
 
-                          child: const Text('Save',style: TextStyle(color: Colors.white)),
+                          child: const Text('Պահպանել',style: TextStyle(color: Colors.white)),
                         ))
                     ,
 

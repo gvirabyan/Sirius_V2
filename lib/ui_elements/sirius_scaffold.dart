@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled9/screens/booking_bag_page.dart';
 import 'package:untitled9/screens/companies_page.dart';
+import 'package:untitled9/screens/specialists_page.dart';
 import 'package:untitled9/screens/user_order_history_page.dart';
 import 'package:untitled9/services/auth_service.dart';
 import '../screens/personal_info_page.dart';
@@ -76,7 +77,12 @@ class _SiriusScaffoldState extends State<SiriusScaffold> {
   void navigateToPaymentInfo(BuildContext context) {
     // TODO: implement PaymentInfoPage
   }
-
+  void navigateToSpecialists(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => SpecialistsPage()),
+    );
+  }
   void navigateToCompanies(BuildContext context) {
     Navigator.pushReplacement(
       context,
@@ -214,6 +220,8 @@ class _SiriusScaffoldState extends State<SiriusScaffold> {
                 setState(() {
                   _selectedIndex = widget.index;
                 });
+                navigateToSpecialists(context);
+
               },
             ),
             _menuItem(
@@ -244,12 +252,12 @@ class _SiriusScaffoldState extends State<SiriusScaffold> {
                     'Անձնական տվյալներ', () => navigateToPersonalInfo(context),5),
                 _subItem('Պատվերների պատմություն',
                     () => navigateToOrderHistory(context),6),
-                _subItem('Նախըտրելի (9)', () => navigateToFavorites(context),7),
-                _subItem('Ակտիվ բաժանորդագրություններ (3)', () {},8),
-                _subItem('Booking & Appointments',
+                _subItem('Նախըտրելի', () => navigateToFavorites(context),7),
+                _subItem('Ակտիվ բաժանորդագրություններ', () {},8),
+                _subItem('Ամրագրումներ',
                     () => navigateToMyBookings(context),9),
                 _subItem(
-                    'Վճարման Եղանակ', () => navigateToPaymentInfo(context),10),
+                    'Վճարման մեթոդներ', () => navigateToPaymentInfo(context),10),
                 _subItem('Դուրս գալ', () => logOut(context),11),
               ],
             ),

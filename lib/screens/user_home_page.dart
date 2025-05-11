@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled9/services/auth_service.dart';
@@ -21,6 +23,52 @@ class _UserHomePageState extends State<UserHomePage> {
     super.initState();
     _loadToken();
     print(AuthService.token);
+    _startAutoSwitch();
+  }
+
+
+  /*final List<String> categories = [
+    'BEAUTY & SPA',
+    'GYM & FITNESS',
+    'CLINICS',
+    'TRAINERS',
+    'TREATMENTS',
+    'WELLNESS',
+  ];*/
+
+  final List<String> backgroundImages = [
+    'assets/categories/aesthetic1.jpg',
+    'assets/categories/beauty1.jpg',
+    'assets/categories/gym1.png',
+    'assets/categories/health1.jpg',
+    'assets/categories/pools1.jpg',
+  ];
+
+  int _currentIndex = 0;
+  late Timer _timer;
+
+  void _startAutoSwitch() {
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      setState(() {
+        _currentIndex = (_currentIndex + 1) % 5;
+      });
+    });
+  }
+
+  void _onCategorySelected(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+
+    // Restart the timer
+    _timer.cancel();
+    _startAutoSwitch();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   Future<void> _loadToken() async {
@@ -41,43 +89,51 @@ class _UserHomePageState extends State<UserHomePage> {
                 fit: StackFit.expand,
                 children: [
                   // Background Image (НЕ скроллится)
-                  const Positioned.fill(
-                    child: Image(
-                      image: AssetImage('assets/background.jpg'),
-                      fit: BoxFit.cover,
+                  // Фоновое изображение
+                  Positioned.fill(
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 800),
+                      switchInCurve: Curves.easeIn,
+                      switchOutCurve: Curves.easeOut,
+                      child: SizedBox.expand( // <- ОБЯЗАТЕЛЬНО для полноэкранности
+                        key: ValueKey<String>(backgroundImages[_currentIndex]),
+                        child: Image.asset(
+                          backgroundImages[_currentIndex],
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
-                  // Overlay
+
+// Полупрозрачная наложенная серая область
                   Container(
-                    color: Colors.black.withOpacity(0.6),
+                    color: Colors.black.withOpacity(0.6), // Создаем наложение с полупрозрачным черным фоном
                   ),
-                  // Foreground Content
+// Основное содержимое страницы
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 30),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Search bar
+                        // Поиск
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(color: Colors.white70),
+                            color: Colors.white.withOpacity(0.1), // Полупрозрачный фон
+                            borderRadius: BorderRadius.circular(30), // Закругленные края
+                            border: Border.all(color: Colors.white70), // Белая граница
                           ),
                           child: const Row(
                             children: [
-                              Icon(Icons.search, color: Colors.white70),
+                              Icon(Icons.search, color: Colors.white70), // Иконка поиска
                               SizedBox(width: 10),
                               Expanded(
                                 child: TextField(
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: Colors.white), // Цвет текста в поле
                                   decoration: InputDecoration(
-                                    hintText:
-                                        'Search for salons, clinics, trainers, treatments...',
-                                    hintStyle: TextStyle(color: Colors.white54),
-                                    border: InputBorder.none,
+                                    hintText: 'մարզասրահ կլինիկա․․․',
+                                    hintStyle: TextStyle(color: Colors.white54), // Цвет подсказки
+                                    border: InputBorder.none, // Без границ у поля
                                   ),
                                 ),
                               ),
@@ -85,6 +141,7 @@ class _UserHomePageState extends State<UserHomePage> {
                           ),
                         ),
                         const SizedBox(height: 40),
+                        // Текст с описанием
                         const Text(
                           'Մեկ հավելված՝ գեղեցկության, առողջության և ֆիթնեսի ծառայությունների ամրագրման համար ողջ Հայաստանում։',
                           textAlign: TextAlign.center,
@@ -107,29 +164,23 @@ class _UserHomePageState extends State<UserHomePage> {
                           ),
                         ),
                         const SizedBox(height: 40),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                'BEAUTY & SPA',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                'GYM & FITNESS',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ],
+                        // Горизонтально прокручиваемые кнопки
+                        SizedBox(
+                          height: 50, // Высота контейнера
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal, // Горизонтальное прокручивание
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            itemCount: 6, // Количество кнопок
+                            separatorBuilder: (_, __) => const SizedBox(width: 16), // Отступы между кнопками
+                            itemBuilder: (context, index) {
+
+                            },
+                          ),
                         ),
                       ],
                     ),
                   ),
+
                 ],
               ),
             ),
@@ -142,7 +193,7 @@ class _UserHomePageState extends State<UserHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'EXPLORE OUR SERVICE CATEGORIES',
+                    'Ծառայությունների ոլորտներ',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,

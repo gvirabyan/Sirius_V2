@@ -11,12 +11,12 @@ class CategoryItem {
 
 class SimpleSlider extends StatelessWidget {
   final List<CategoryItem> categories = [
-    CategoryItem(title: 'Beauty & Spa', imagePath: 'assets/categories/beauty.png'),
-    CategoryItem(title: 'Aesthetic Medicine', imagePath: 'assets/categories/aesthetic.png'),
-    CategoryItem(title: 'Gym & Fitness', imagePath: 'assets/categories/gym.png'),
-    CategoryItem(title: 'POOLS', imagePath: 'assets/categories/pools.png'),
-    CategoryItem(title: 'Health & Medical', imagePath: 'assets/categories/health.png'),
-    CategoryItem(title: 'Yoga & Wellness', imagePath: 'assets/categories/yoga.png'),
+    CategoryItem(title: 'ԳԵՂԵՑԿՈՒԹՅՈՒՆ ԵՎ ՍՊԱ', imagePath: 'assets/categories/beauty.png'),
+    CategoryItem(title: 'ԷՍԹԵՏԻԿ ԲԺՇԿՈՒԹՅՈՒՆ', imagePath: 'assets/categories/aesthetic.png'),
+    CategoryItem(title: 'ՄԱՐԶԱՍՐԱՀ ԵՎ ՖԻԹՆԵՍ', imagePath: 'assets/categories/gym.png'),
+    CategoryItem(title: 'ԼՈՂԱՎԱԶԱՆՆԵՐ', imagePath: 'assets/categories/pools.png'),
+    CategoryItem(title: 'ԱՌՈՂՋՈՒԹՅՈՒՆ ԵՎ ԲԺՇԿՈՒԹՅՈՒՆ', imagePath: 'assets/categories/health.png'),
+    CategoryItem(title: 'ՅՈԳԱ ԵՎ ԱՌՈՂՋ ԱՊՐԵԼԱԿԵՐՊ ', imagePath: 'assets/categories/yoga.png'),
   ];
 
   void _onItemTapped(BuildContext context, int index) async {
@@ -99,7 +99,7 @@ class SimpleSlider extends StatelessWidget {
                             categories[index].title,
                             style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: 14,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),

@@ -67,7 +67,7 @@ class _BookingDateDialogState extends State<BookingDateDialog> {
             const SizedBox(height: 12),
             Row(
               children: [
-                Expanded(child: _buildButton('Ամսաթիվ', Icons.calendar_today)),
+                Expanded(child: _buildButton('03/05/2025', Icons.calendar_today)),
                 const SizedBox(width: 12),
                 Expanded(child: _buildTimeDropdown()),
               ],

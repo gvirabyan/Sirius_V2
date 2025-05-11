@@ -73,6 +73,7 @@ flutter:
     - assets/categories/
     - assets/golds_gym.png
     - assets/services/
+    - assets/specialists/
 
     - assets/home/img1.png
     - assets/home/spa.jpeg

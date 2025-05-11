@@ -22,7 +22,7 @@ class PasswordChangePage extends StatelessWidget {
           builder: (context, setState) {
             return AlertDialog(
               title: const Text(
-                'Change Password',
+                'Փոխել գաղտնաբառը',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
@@ -32,24 +32,22 @@ class PasswordChangePage extends StatelessWidget {
                   children: [
                     const Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('Email *'),
+                      child: Text('Էլ․հասցե *'),
                     ),
                     TextField(
                       controller: emailController,
                       decoration: const InputDecoration(
-                        hintText: 'Enter your email',
                       ),
                     ),
                     const SizedBox(height: 16),
                     const Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('New Password *'),
+                      child: Text('Նոր գաղտնաբառ*'),
                     ),
                     TextField(
                       controller: newPasswordController,
                       obscureText: obscureNewPassword,
                       decoration: InputDecoration(
-                        hintText: 'Enter new password',
                         suffixIcon: IconButton(
                           icon: Icon(obscureNewPassword
                               ? Icons.visibility_off
@@ -65,13 +63,12 @@ class PasswordChangePage extends StatelessWidget {
                     const SizedBox(height: 16),
                     const Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('Confirm Password *'),
+                      child: Text('Կրկնել գաղտնաբառը *'),
                     ),
                     TextField(
                       controller: confirmPasswordController,
                       obscureText: obscureConfirmPassword,
                       decoration: InputDecoration(
-                        hintText: 'Re-enter new password',
                         suffixIcon: IconButton(
                           icon: Icon(obscureConfirmPassword
                               ? Icons.visibility_off
@@ -116,25 +113,25 @@ class PasswordChangePage extends StatelessWidget {
                         Navigator.of(context).pop();
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Password changed successfully!'),
+                            content: Text('Հաջողությամբ կատարվել է!'),
                           ),
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Failed to change password'),
+                            content: Text('Չի հաջողվել պահպանել'),
                           ),
                         );
                       }
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Passwords do not match!'),
+                          content: Text('գաղտնաբառերը տարբեր են!'),
                         ),
                       );
                     }
                   },
-                  child: const Text('CONFIRM'),
+                  child: const Text('Հաստատել'),
                 ),
               ],
             );
